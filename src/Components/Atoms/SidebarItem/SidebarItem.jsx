@@ -1,11 +1,14 @@
 import React from 'react'
-import './style.css'
+import { NavLink } from 'react-router-dom'
+import { LinkStyled } from './styled'
 
 export default function SidebarItem({item}) {
+  const {label, icon: Icon, to} = item
+
   return (
-    <div>
-      {item.label}
-      <div className="logo"></div>
-    </div>
+    <LinkStyled to={to}>
+      <span>{Icon && <Icon />}</span>
+      <span>{label}</span>
+    </LinkStyled>
   )
 }

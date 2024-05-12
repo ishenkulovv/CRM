@@ -1,9 +1,10 @@
 import React from 'react'
+import { NavbarStyled } from './styled'
 
-export default function Navbar() {
+export default function Navbar({title}) {
   return (
-    <div>
-      
-    </div>
+    <NavbarStyled>
+      {title}
+    </NavbarStyled>
   )
 }

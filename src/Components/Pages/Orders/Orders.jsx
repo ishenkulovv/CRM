@@ -1,9 +1,10 @@
 import React from 'react'
+import MainTemplate from '../../Templates/MainTemplate/MainTemplate';
 
 export default function Orders() {
   return (
-    <div>
+    <MainTemplate title="Orders">
       Orders
-    </div>
+    </MainTemplate>
   )
 }
