@@ -44,14 +44,20 @@ export const SALES_LIST = [
   {
     id: 'integrations',
     label: 'Integrations',
+    to: '/integrations',
+    icon: DashboardIcon
   },
   {
     id: 'my_store',
     label: 'My Store',
+    to: '/my_store',
+    icon: DashboardIcon
   },
   {
     id: 'discounts',
     label: 'Discounts',
+    to: '/discounts',
+    icon: DashboardIcon
   },
 ]
 
@@ -59,9 +65,13 @@ export const OTHER_LIST = [
   {
     id: 'settings',
     label: 'Settings',
+    to: '/settings',
+    icon: DashboardIcon
   },
   {
     id: 'get_help',
     label: 'Get Help',
+    to: '/help',
+    icon: DashboardIcon
   },
 ]

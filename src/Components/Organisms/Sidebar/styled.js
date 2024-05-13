@@ -11,6 +11,7 @@ export const SidebarStyled = styled.div`
   top: 0px;
   left: 0px;
   background-color: #fff;
+  border-right: 2px solid #F1F2F4;
 `
 
 export const SidebarHead = styled.div``
@@ -28,4 +29,19 @@ export const SidebarTitle = styled.div`
   line-height: 19.2px;
   text-align: left;
   color: #A0AEC0;
+`
+
+export const SidebarBack = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #F1F2F4;
+  background-color: #fff;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 30px;
+  left: 239px;
+  border-radius: 50%;
+  cursor: pointer;
 `
