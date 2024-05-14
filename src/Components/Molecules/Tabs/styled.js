@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components";
+import { styled, css } from "styled-components";
 
 export const TabsContainer = styled.div`
-    display: flex;git a
+    display: flex;
     align-items: center;
     padding: 0px 24px;
     padding-bottom: 6px;
@@ -16,10 +16,21 @@ export const Tab = styled.div`
     line-height: 24px;
     text-align: left;
     color: #718096;
+    cursor: pointer;
+    padding: 0 8px;
 
     ${(props) =>
         props.active === "true" &&
         css`
             color: #0caf60;
+            &:after {
+                position: absolute;
+                bottom: -7px;
+                left: 0px;
+                content: "";
+                width: 100%;
+                height: 2px;
+                background-color: #0caf60;
+            }
         `}
 `;
