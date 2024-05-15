@@ -70,3 +70,31 @@ export const ordersList = [
     price: '350.00',
   },
 ]
+
+export const TABS_LIST = [
+  {
+    id: 'all',
+    label: 'All Orders',
+    active: true,
+  },
+  {
+    id: 'drafs',
+    label: 'Drafs',
+    active: false,
+  },
+  {
+    id: 'shipping',
+    label: 'Shipping',
+    active: false,
+  },
+  {
+    id: 'completed',
+    label: 'Completed',
+    active: false,
+  },
+  {
+    id: 'canceled',
+    label: 'Canceled',
+    active: false,
+  },
+]

@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from '../../Organisms/Sidebar/Sidebar'
-import { MainContainer } from './styled'
+import { Container, MainContainer } from './styled'
 import Navbar from '../../Organisms/Navbar/Navbar'
 
 export default function MainTemplate({children, title}) {
@@ -9,7 +9,9 @@ export default function MainTemplate({children, title}) {
       <Sidebar />
       <MainContainer>
         <Navbar title={title} />
-        {children}
+        <Container>
+          {children}
+        </Container>
       </MainContainer>
     </>
   )
