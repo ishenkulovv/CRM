@@ -1,5 +1,12 @@
 import React from "react";
+import Chart from "../../../assets/icons/Chart";
+import MainTemplate from "../../Templates/MainTemplate/MainTemplate";
 
 export default function Analytics() {
-    return <div>Analytics</div>;
+    return (
+        <MainTemplate>
+            Analytics
+            <Chart />
+        </MainTemplate>
+    );
 }
