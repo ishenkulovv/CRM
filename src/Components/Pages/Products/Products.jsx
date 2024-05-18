@@ -4,7 +4,7 @@ import Briefcase from "../../../assets/icons/Briefcase";
 
 export default function Products() {
     return (
-        <MainTemplate>
+        <MainTemplate title='Products'>
             Products
             <Briefcase />
         </MainTemplate>

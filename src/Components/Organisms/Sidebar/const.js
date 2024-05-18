@@ -12,7 +12,7 @@ export const MAIN_LIST = [
     },
     {
         id: "orders",
-        label: "Orders",
+        label: "Orders", 
     },
     {
         id: "products",

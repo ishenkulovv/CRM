@@ -4,7 +4,7 @@ import DashBoard from "../../../assets/icons/DashBoard";
 
 export default function Dashboard() {
     return (
-        <MainTemplate>
+        <MainTemplate title='Dashboard'>
             <DashBoard />
             dashboard
         </MainTemplate>

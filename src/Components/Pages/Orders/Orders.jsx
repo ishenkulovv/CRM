@@ -2,6 +2,8 @@ import React from "react";
 import MainTemplate from "../../Templates/MainTemplate/MainTemplate";
 import { useState } from "react";
 import Tabs from "../../Molecules/Tabs/Tabs";
+import Table from "../../Molecules/Table/Table";
+import CheckBox from "../../Atoms/CheckBox/CheckBox";
 
 export default function Orders() {
     const [tabsList, setTabsList] = useState(TABS_LIST);
@@ -22,6 +24,7 @@ export default function Orders() {
         <MainTemplate title="Orders">
             <BlockContainer>
                 <Tabs list={tabsList} setTab={setTab} />
+                <Table />
             </BlockContainer>
         </MainTemplate>
     );
