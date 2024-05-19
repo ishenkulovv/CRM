@@ -1,3 +1,4 @@
+
 import { styled } from "styled-components";
 
 export const ProfileImage = styled.img`
@@ -29,4 +30,5 @@ export const ProfileCompanyName = styled.h3`
   line-height: 19.2px;
   text-align: left;
   color: #718096;
+
 `

@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
 export const NavbarStyled = styled.div`
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,3 +27,4 @@ export const NavbarTitle = styled.h1`
   text-align: left;
   color: #111827;
 `
+

@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
 export const SidebarStyled = styled.div`
+
   min-height: 100vh;
   max-width: 256px;
   width: 100%;
@@ -45,3 +46,4 @@ export const SidebarBack = styled.div`
   border-radius: 50%;
   cursor: pointer;
 `
+

@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { NavbarLeft, NavbarRight, NavbarStyled, NavbarTitle } from './styled'
 import ProfilePreview from '../../Molecules/ProfilePreview/ProfilePreview'
@@ -17,4 +18,5 @@ export default function Navbar({title}) {
       </NavbarRight>
     </NavbarStyled>
   )
+
 }

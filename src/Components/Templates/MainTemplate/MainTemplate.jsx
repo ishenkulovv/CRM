@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Sidebar from '../../Organisms/Sidebar/Sidebar'
 import { Container, MainContainer } from './styled'
@@ -15,4 +16,5 @@ export default function MainTemplate({children, title}) {
       </MainContainer>
     </>
   )
+
 }

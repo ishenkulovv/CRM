@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { ProfileCompanyName, ProfileFullName, ProfileImage, ProfileStyled, ProfileTexts } from './styled'
 

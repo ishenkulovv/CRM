@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { TabStyled, TabsContainer } from './styled'
 
@@ -15,4 +16,5 @@ export default function Tabs({ list, setTab }) {
       ))}
     </TabsContainer>
   )
+
 }

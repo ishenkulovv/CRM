@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { SidebarBack, SidebarBlock, SidebarFooter, SidebarHead, SidebarStyled, SidebarTitle } from './styled'
 import Logo from '../../Atoms/Logo/Logo'
@@ -31,4 +32,5 @@ export default function Sidebar() {
       </SidebarFooter>
     </SidebarStyled>
   )
+
 }
