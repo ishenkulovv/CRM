@@ -3,6 +3,7 @@ import MainTemplate from '../../Templates/MainTemplate/MainTemplate';
 import { BlockContainer } from '../../../Base/styled';
 import Tabs from '../../Molecules/Tabs/Tabs';
 import { TABS_LIST } from './const';
+import Table from '../../Molecules/Table/Table';
 
 export default function Orders() {
 
@@ -24,6 +25,7 @@ export default function Orders() {
     <MainTemplate title="Orders">
       <BlockContainer>
         <Tabs list={tabsList} setTab={setTab} />
+        <Table />
       </BlockContainer>
     </MainTemplate>
   )
