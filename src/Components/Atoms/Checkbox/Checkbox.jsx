@@ -2,11 +2,11 @@ import React from 'react'
 import { CheckboxRadio, CheckboxContainer, CheckboxInput, CheckboxLabel } from './styled'
 import CheckboxArrowIcon from '../../../Assets/Icons/CheckboxArrowIcon'
 
-export default function Checkbox() {
+export default function Checkbox( { id } ) {
   return (
     <CheckboxContainer>
-      <CheckboxInput id="checkbox-1" type="checkbox" />
-      <CheckboxLabel htmlFor='checkbox-1'>
+      <CheckboxInput id={id} type="checkbox" />
+      <CheckboxLabel htmlFor={id}>
         <CheckboxRadio>
           <CheckboxArrowIcon />
         </CheckboxRadio>

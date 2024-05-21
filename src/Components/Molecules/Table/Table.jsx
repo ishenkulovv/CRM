@@ -2,7 +2,7 @@ import React from 'react'
 import { TableBody, TableContainer, TableHead, TableOrder, TableOrderId, TableStatus, TableTd, TableTh, TableTr } from './styled'
 import Checkbox from '../../Atoms/Checkbox/Checkbox'
 
-export default function Table() {
+export default function Table({ data }) {
   return (
     <TableContainer>
       <TableHead>
@@ -17,24 +17,26 @@ export default function Table() {
         </TableTr>
       </TableHead>
       <TableBody>
-        <TableTr>
-          <TableTd>
-            <Checkbox />
-          </TableTd>
-          <TableTd>
-            <TableOrder>Vest Hoddie</TableOrder>
-            <TableOrderId>#ID238976</TableOrderId>
-          </TableTd>
-          <TableTd>Apr 24, 2022 </TableTd>
-          <TableTd>Chieko Chute</TableTd>
-          <TableTd>
-            <TableStatus bg="#E7F7EF" color="#0CAF60">Paid</TableStatus>
-          </TableTd>
-          <TableTd>
-            <TableStatus bg="#FFF0E6" color="#FE964A">Cancelled</TableStatus>
-          </TableTd>
-          <TableTd>$450.00</TableTd>
-        </TableTr>
+        {data?.map(item => (
+          <TableTr>
+            <TableTd>
+              <Checkbox id={item.id} />
+            </TableTd>
+            <TableTd>
+              <TableOrder>{ item.title }</TableOrder>
+              <TableOrderId>{ item.id }</TableOrderId>
+            </TableTd>
+            <TableTd>{ item.date }</TableTd>
+            <TableTd>{ item.customer.full_name }</TableTd>
+            <TableTd>
+              <TableStatus bg="#E7F7EF" color="#0CAF60">{ item.payment_status }</TableStatus>
+            </TableTd>
+            <TableTd>
+              <TableStatus bg="#FFF0E6" color="#FE964A">{ item.status }</TableStatus>
+            </TableTd>
+            <TableTd>${ item.price }</TableTd>
+          </TableTr>
+        ))}
       </TableBody>
     </TableContainer>
   )
