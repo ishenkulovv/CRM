@@ -5,14 +5,14 @@ import Tabs from '../../Molecules/Tabs/Tabs';
 import { TABS_LIST, ordersList } from './const';
 import Table from '../../Molecules/Table/Table';
 import Search from '../../Atoms/Search/Search';
+import CustomDatePicker from '../../Atoms/CustomDatePicker/CustomDatePicker';
 
 export default function Orders() {
-
   const [tabsList, setTabsList] = useState(TABS_LIST);
   const [search, setSearch] = useState('');
   const [data, setData] = useState(ordersList)
   useEffect(() => {
-    searchByTitle(search.trimer())
+    searchByTitle(search.trim())
   }, [search])
 
   const setTab = (id) => {
@@ -29,7 +29,6 @@ export default function Orders() {
 
   const searchByTitle = (title) => {
     const sendData = ordersList.filter(item => item.title.toLowerCase().trim().includes(title.toLowerCase().trim()))
-    console.log(sendData);
     setData(sendData)
   }
 
@@ -38,6 +37,7 @@ export default function Orders() {
       <BlockContainer>
         <Tabs list={tabsList} setTab={setTab} />
         <Search value={search} setValue={setSearch} />
+        <CustomDatePicker data={ordersList} setData={setData} />
         <Table data={data} />
       </BlockContainer>
     </MainTemplate>

@@ -2,7 +2,7 @@ export const ordersList = [
   {
     id: '#ID1234',
     title: 'Simple Order',
-    date: 'Apr 24, 2022',
+    date: '2024-05-25',
     customer: {
       id: 'customer_1',
       first_name: 'Chieko',
@@ -16,7 +16,7 @@ export const ordersList = [
   {
     id: '#ID5678',
     title: 'Complex Order',
-    date: 'May 12, 2022',
+    date: '2024-05-24',
     customer: {
       id: 'customer_2',
       first_name: 'John',
@@ -30,7 +30,7 @@ export const ordersList = [
   {
     id: '#ID91011',
     title: 'Special Order',
-    date: 'Jun 5, 2022',
+    date: '2024-05-23',
     customer: {
       id: 'customer_3',
       first_name: 'Alice',
@@ -44,7 +44,7 @@ export const ordersList = [
   {
     id: '#ID121314',
     title: 'Bulk Order',
-    date: 'Jul 18, 2022',
+    date: '2024-05-22',
     customer: {
       id: 'customer_4',
       first_name: 'Michael',
@@ -58,7 +58,7 @@ export const ordersList = [
   {
     id: '#ID151617',
     title: 'Express Order',
-    date: 'Aug 2, 2022',
+    date: '2024-05-21',
     customer: {
       id: 'customer_5',
       first_name: 'Emily',
