@@ -10,8 +10,10 @@ export const ordersList = [
       full_name: 'Chieko Chute',
     },
     payment_status: 'paid',
-    status: 'Unfulfilled',
-    price: '450.00',
+    status: 'Completed',
+    color_status: 'rgba(12, 175, 96, 1)',
+    bg_status: 'rgba(231, 247, 239, 1)',
+    price: '450',
   },
   {
     id: '#ID5678',
@@ -24,8 +26,10 @@ export const ordersList = [
       full_name: 'John Doe',
     },
     payment_status: 'pending',
-    status: 'Fulfilled',
-    price: '750.00',
+    status: 'Drafts',
+    color_status: 'rgba(254, 150, 74, 1)',
+    bg_status: 'rgba(255, 240, 230, 1)',
+    price: '750',
   },
   {
     id: '#ID91011',
@@ -38,8 +42,10 @@ export const ordersList = [
       full_name: 'Alice Smith',
     },
     payment_status: 'pending',
-    status: 'Processing',
-    price: '1200.00',
+    status: 'Shipping',
+    color_status: 'rgba(140, 98, 255, 1)',
+    bg_status: 'rgba(244, 240, 255, 1)',
+    price: '1200',
   },
   {
     id: '#ID121314',
@@ -52,8 +58,10 @@ export const ordersList = [
       full_name: 'Michael Johnson',
     },
     payment_status: 'paid',
-    status: 'Shipped',
-    price: '2500.00',
+    status: 'Shipping',
+    color_status: 'rgba(140, 98, 255, 1)',
+    bg_status: 'rgba(244, 240, 255, 1)',
+    price: '2500',
   },
   {
     id: '#ID151617',
@@ -66,8 +74,10 @@ export const ordersList = [
       full_name: 'Emily Brown',
     },
     payment_status: 'paid',
-    status: 'Delivered',
-    price: '350.00',
+    status: 'Cancelled',
+    color_status: 'rgba(253, 106, 106, 1)',
+    bg_status: 'rgba(255, 240, 240, 1)',
+    price: '350',
   },
 ]
 
@@ -78,8 +88,8 @@ export const TABS_LIST = [
     active: true,
   },
   {
-    id: 'drafs',
-    label: 'Drafs',
+    id: 'drafts',
+    label: 'Drafts',
     active: false,
   },
   {
@@ -93,8 +103,8 @@ export const TABS_LIST = [
     active: false,
   },
   {
-    id: 'canceled',
-    label: 'Canceled',
+    id: 'cancelled',
+    label: 'Cancelled',
     active: false,
   },
 ]
