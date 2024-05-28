@@ -9,7 +9,7 @@ export const ordersList = [
       last_name: 'Chute',
       full_name: 'Chieko Chute',
     },
-    payment_status: 'paid',
+    payment_status: 'unpaid',
     status: 'Completed',
     color_status: 'rgba(12, 175, 96, 1)',
     bg_status: 'rgba(231, 247, 239, 1)',
@@ -106,5 +106,20 @@ export const TABS_LIST = [
     id: 'cancelled',
     label: 'Cancelled',
     active: false,
+  },
+]
+
+export const PAYMENT_OPTIONS = [
+  {
+    value: 'paid',
+    label: 'Paid',
+  },
+  {
+    value: 'pending',
+    label: 'Pending',
+  },
+  {
+    value: 'unpaid',
+    label: 'Unpaid',
   },
 ]

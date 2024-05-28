@@ -2,17 +2,21 @@ import React, { useEffect, useState } from 'react'
 import MainTemplate from '../../Templates/MainTemplate/MainTemplate';
 import { BlockContainer } from '../../../Base/styled';
 import Tabs from '../../Molecules/Tabs/Tabs';
-import { TABS_LIST, ordersList } from './const';
+import { TABS_LIST, ordersList, PAYMENT_OPTIONS } from './const';
 import Table from '../../Molecules/Table/Table';
 import Search from '../../Atoms/Search/Search';
 import CustomDatePicker from '../../Atoms/CustomDatePicker/CustomDatePicker';
 import FilterButton from '../../Atoms/FilterButton/FilterButton';
+import Select from '../../Atoms/Select/Select';
 
 export default function Orders() {
   const [tabsList, setTabsList] = useState(TABS_LIST);
   const [search, setSearch] = useState('');
   const [data, setData] = useState(ordersList)
   const [filtersShow, setFiltersShow] = useState(false)
+  const [currentPayment, setCurrentPayment] = useState(null)
+
+
   useEffect(() => {
     searchByTitle(search.trim())
   }, [search])
@@ -51,6 +55,12 @@ export default function Orders() {
     setData(sendData)
   }
 
+  const searchByPayment = (payment) => {
+    const value = payment.value
+    const sendData = ordersList.filter(item => item.payment_status.toLowerCase().trim() === value.toLowerCase().trim())
+    setData(sendData)
+  }
+
   return (
     <MainTemplate title="Orders">
       <BlockContainer>
@@ -58,17 +68,7 @@ export default function Orders() {
         <Search value={search} setValue={setSearch} />
         <CustomDatePicker data={ordersList} setData={setData} />
         <FilterButton active={filtersShow} setFilters={setFiltersShow} />
-        {filtersShow ? (
-          <div>
-            <select name="" id="" onChange={searchByPrice}>
-              <option value="none">Select average price</option>
-              <option value="350">$350</option>
-              <option value="450">$450</option>
-              <option value="1200">$1200</option>
-              <option value="2500">$2500</option>
-            </select>
-          </div>
-        ) : null}
+        <Select options={PAYMENT_OPTIONS} handler={searchByPayment} />
         <Table data={data} />
       </BlockContainer>
     </MainTemplate>
