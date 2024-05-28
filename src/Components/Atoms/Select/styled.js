@@ -7,6 +7,9 @@ export const SelectStyled = styled.div`
 `
 
 export const SelectContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: #FAFAFA;
   padding: 8px 16px;
   border-radius: 12px;
@@ -22,7 +25,11 @@ export const SelectValue = styled.div`
   color: ${({active}) => active === 'null' ? '#A0AEC0' : 'rgba(17, 24, 39, 1)'} ;
 `
 
-export const SelectIcon = styled.div``
+export const SelectIcon = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`
 
 export const SelectOptions = styled.div`
   position: absolute;
@@ -56,3 +63,5 @@ export const SelectOption = styled.div`
     color: white;
   }
 `
+
+export const SelectClear = styled.div``

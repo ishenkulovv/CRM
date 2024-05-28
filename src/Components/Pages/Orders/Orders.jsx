@@ -8,14 +8,15 @@ import Search from '../../Atoms/Search/Search';
 import CustomDatePicker from '../../Atoms/CustomDatePicker/CustomDatePicker';
 import FilterButton from '../../Atoms/FilterButton/FilterButton';
 import Select from '../../Atoms/Select/Select';
+import { FlexRow } from './styled';
+import Button from '../../Atoms/Button/Button';
 
 export default function Orders() {
   const [tabsList, setTabsList] = useState(TABS_LIST);
   const [search, setSearch] = useState('');
-  const [data, setData] = useState(ordersList)
+  const [data, setData] = useState(ordersList?.map(item => ({...item, checked: false})))
   const [filtersShow, setFiltersShow] = useState(false)
   const [currentPayment, setCurrentPayment] = useState(null)
-
 
   useEffect(() => {
     searchByTitle(search.trim())
@@ -56,8 +57,32 @@ export default function Orders() {
   }
 
   const searchByPayment = (payment) => {
-    const value = payment.value
-    const sendData = ordersList.filter(item => item.payment_status.toLowerCase().trim() === value.toLowerCase().trim())
+    const value = payment?.value
+
+    const sendData = ordersList.filter(item => {
+      if (!value) return item;
+      return item?.payment_status?.toLowerCase()?.trim() === value?.toLowerCase()?.trim()
+    })
+    setData(sendData)
+  }
+
+  const checkedForRemove = (id, status) => {
+    const sendData = data.map(item => {
+      if (item.id === id) {
+        item.checked = status
+      }
+      return item
+    })
+
+    setData(sendData)
+  }
+
+  const removeOrder = () => {
+    const sendData = data.filter(item => !item.checked)
+    const dataLength = sendData.length === ordersList.length ? true : false
+    if (dataLength) {
+      alert('Ордер танданыз!')
+    }
     setData(sendData)
   }
 
@@ -65,11 +90,20 @@ export default function Orders() {
     <MainTemplate title="Orders">
       <BlockContainer>
         <Tabs list={tabsList} setTab={setTab} />
-        <Search value={search} setValue={setSearch} />
-        <CustomDatePicker data={ordersList} setData={setData} />
-        <FilterButton active={filtersShow} setFilters={setFiltersShow} />
-        <Select options={PAYMENT_OPTIONS} handler={searchByPayment} />
-        <Table data={data} />
+        <FlexRow>
+          <Search value={search} setValue={setSearch} />
+          <CustomDatePicker data={ordersList} setData={setData} />
+          <FilterButton active={filtersShow} setFilters={setFiltersShow} />
+          <Button handler={removeOrder}>Remove order</Button>
+        </FlexRow>
+        {filtersShow ? 
+          (
+            <Select options={PAYMENT_OPTIONS} handler={searchByPayment} />
+          )
+          :
+          null
+        }
+        <Table data={data} handlerCheckbox={checkedForRemove} />
       </BlockContainer>
     </MainTemplate>
   )

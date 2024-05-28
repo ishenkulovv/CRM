@@ -4,8 +4,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 
 export default function CustomDatePicker({data, setData}) {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const searchByDate = (date) => {
     setStartDate(date)
@@ -17,6 +17,7 @@ export default function CustomDatePicker({data, setData}) {
 
   const searchByDateRange = (startData, endData) => {
     const result = data.filter(item => {
+      if (!startData || !endData) return item;
       const itemDate = moment(item.date).format('YYYY-MM-DD');
       const start = moment(startData).format('YYYY-MM-DD');
       const end = moment(endData).format('YYYY-MM-DD');;
@@ -32,7 +33,8 @@ export default function CustomDatePicker({data, setData}) {
         selected={startDate} 
         startDate={startDate} 
         endDate={endDate} 
-        selectsRange 
+        selectsRange
+        isClearable
         onChange={(dates) => {
           console.log(dates);
           const [start, end] = dates;

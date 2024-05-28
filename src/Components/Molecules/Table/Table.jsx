@@ -3,7 +3,7 @@ import { TableBody, TableContainer, TableHead, TableOrder, TableOrderId, TableSt
 import Checkbox from '../../Atoms/Checkbox/Checkbox'
 import moment from 'moment'
 
-export default function Table({ data }) {
+export default function Table({ data, handlerCheckbox }) {
   return (
     <TableContainer>
       <TableHead>
@@ -19,9 +19,9 @@ export default function Table({ data }) {
       </TableHead>
       <TableBody>
         {data?.map(item => (
-          <TableTr>
+          <TableTr key={item.id}>
             <TableTd>
-              <Checkbox id={item.id} />
+              <Checkbox item={item} handler={handlerCheckbox} />
             </TableTd>
             <TableTd>
               <TableOrder>{ item.title }</TableOrder>

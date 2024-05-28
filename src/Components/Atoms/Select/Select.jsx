@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { SelectContent, SelectIcon, SelectOption, SelectOptions, SelectStyled, SelectValue } from './styled'
+import { SelectClear, SelectContent, SelectIcon, SelectOption, SelectOptions, SelectStyled, SelectValue } from './styled'
 import useOnClickOutside from '../../../Hooks/useOnClickOutside'
 
 export default function Select({options, handler}) {
@@ -17,13 +17,25 @@ export default function Select({options, handler}) {
     hideView()
   }
 
+  const clearHandler = () => {
+    handler(null)
+    setCurrentOption(null)
+    setTimeout(() => {
+      hideView(false)
+    }, 0);
+  }
+  
+
   useOnClickOutside(selectRef, hideView)
 
   return (
     <SelectStyled ref={selectRef}>
       <SelectContent onClick={toggleView}>
         <SelectValue active={String(currentOption)}>{ currentOption ?? 'Select'}</SelectValue>
-        <SelectIcon></SelectIcon>
+        <SelectIcon>
+          <SelectClear onClick={clearHandler}>X</SelectClear>
+          A
+        </SelectIcon>
       </SelectContent>
       {view ? <SelectOptions>
         {options.map(option => (
