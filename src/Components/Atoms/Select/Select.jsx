@@ -17,12 +17,11 @@ export default function Select({options, handler}) {
     hideView()
   }
 
-  const clearHandler = () => {
+  const clearHandler = (event) => {
+    event.stopPropagation()
     handler(null)
     setCurrentOption(null)
-    setTimeout(() => {
-      hideView(false)
-    }, 0);
+    hideView(false)
   }
   
 

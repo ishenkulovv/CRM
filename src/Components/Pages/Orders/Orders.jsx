@@ -10,6 +10,8 @@ import FilterButton from '../../Atoms/FilterButton/FilterButton';
 import Select from '../../Atoms/Select/Select';
 import { FlexRow } from './styled';
 import Button from '../../Atoms/Button/Button';
+import ModalTemplate from '../../Templates/ModalTemplate/ModalTemplate';
+import RemoveModal from '../../Organisms/RemoveModal/RemoveModal';
 
 export default function Orders() {
   const [tabsList, setTabsList] = useState(TABS_LIST);
@@ -17,6 +19,7 @@ export default function Orders() {
   const [data, setData] = useState(ordersList?.map(item => ({...item, checked: false})))
   const [filtersShow, setFiltersShow] = useState(false)
   const [currentPayment, setCurrentPayment] = useState(null)
+  const [visibleRemove, setVisibleRemove] = useState(false)
 
   useEffect(() => {
     searchByTitle(search.trim())
@@ -82,19 +85,25 @@ export default function Orders() {
     const dataLength = sendData.length === ordersList.length ? true : false
     if (dataLength) {
       alert('Ордер танданыз!')
+      hideRemove()
     }
     setData(sendData)
+    hideRemove()
   }
+
+  const showRemove = () => setVisibleRemove(true);
+  const hideRemove = () => setVisibleRemove(false);
 
   return (
     <MainTemplate title="Orders">
+      {visibleRemove ? <RemoveModal closeHandler={hideRemove} submitHandler={removeOrder} /> : null}
       <BlockContainer>
         <Tabs list={tabsList} setTab={setTab} />
         <FlexRow>
           <Search value={search} setValue={setSearch} />
           <CustomDatePicker data={ordersList} setData={setData} />
           <FilterButton active={filtersShow} setFilters={setFiltersShow} />
-          <Button handler={removeOrder}>Remove order</Button>
+          <Button handler={showRemove}>Remove order</Button>
         </FlexRow>
         {filtersShow ? 
           (
