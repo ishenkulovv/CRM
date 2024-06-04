@@ -12,11 +12,18 @@ import { FlexRow } from './styled';
 import Button from '../../Atoms/Button/Button';
 import ModalTemplate from '../../Templates/ModalTemplate/ModalTemplate';
 import RemoveModal from '../../Organisms/RemoveModal/RemoveModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkedForRemove, removeHandler, searchHandler } from '../../../Store/Slice/ordersSlice';
 
 export default function Orders() {
+
+  const dispatch = useDispatch()
+
   const [tabsList, setTabsList] = useState(TABS_LIST);
   const [search, setSearch] = useState('');
-  const [data, setData] = useState(ordersList?.map(item => ({...item, checked: false})))
+  // const [data, setData] = useState(ordersList?.map(item => ({...item, checked: false})))
+  const data = useSelector(state => state?.rootReducer?.ordersSlice?.data)
+  console.log(data);
   const [filtersShow, setFiltersShow] = useState(false)
   const [currentPayment, setCurrentPayment] = useState(null)
   const [visibleRemove, setVisibleRemove] = useState(false)
@@ -46,10 +53,7 @@ export default function Orders() {
     setData(sendData)
   }
 
-  const searchByTitle = (title) => {
-    const sendData = ordersList.filter(item => item.title.toLowerCase().trim().includes(title.toLowerCase().trim()))
-    setData(sendData)
-  }
+  const searchByTitle = (title) => dispatch(searchHandler(title))
 
   const searchByPrice = (e) => {
     const value = e.target.value;
@@ -69,27 +73,9 @@ export default function Orders() {
     setData(sendData)
   }
 
-  const checkedForRemove = (id, status) => {
-    const sendData = data.map(item => {
-      if (item.id === id) {
-        item.checked = status
-      }
-      return item
-    })
+  const checkedHandler = (id, status) => dispatch(checkedForRemove({id, status}));
 
-    setData(sendData)
-  }
-
-  const removeOrder = () => {
-    const sendData = data.filter(item => !item.checked)
-    const dataLength = sendData.length === ordersList.length ? true : false
-    if (dataLength) {
-      alert('Ордер танданыз!')
-      hideRemove()
-    }
-    setData(sendData)
-    hideRemove()
-  }
+  const removeOrder = () => dispatch(removeHandler())
 
   const showRemove = () => setVisibleRemove(true);
   const hideRemove = () => setVisibleRemove(false);
@@ -101,7 +87,7 @@ export default function Orders() {
         <Tabs list={tabsList} setTab={setTab} />
         <FlexRow>
           <Search value={search} setValue={setSearch} />
-          <CustomDatePicker data={ordersList} setData={setData} />
+          {/* <CustomDatePicker data={ordersList} setData={setData} /> */}
           <FilterButton active={filtersShow} setFilters={setFiltersShow} />
           <Button handler={showRemove}>Remove order</Button>
         </FlexRow>
@@ -112,7 +98,7 @@ export default function Orders() {
           :
           null
         }
-        <Table data={data} handlerCheckbox={checkedForRemove} />
+        <Table data={data} handlerCheckbox={checkedHandler} />
       </BlockContainer>
     </MainTemplate>
   )
