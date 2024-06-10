@@ -14,3 +14,9 @@ export const FlexBlock = styled.div`
   justify-content: ${({justifyContent}) => justifyContent || 'flex-start'};
   align-items: ${({alignItems}) => alignItems || 'flex-start'};
 `
+
+export const GridBlock = styled(FlexBlock)`
+  display: grid;
+  grid-template-columns: ${({gridColumns}) => gridColumns || 'auto'};
+  gap: 10px;
+`
