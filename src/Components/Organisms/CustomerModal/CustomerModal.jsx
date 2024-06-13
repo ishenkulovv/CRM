@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ModalTemplate from '../../Templates/ModalTemplate/ModalTemplate'
 import { GridBlock } from '../../../Base/styled'
 import Button from '../../Atoms/Button/Button'
@@ -7,12 +7,13 @@ import Select from '../../Atoms/Select/Select'
 import { LOCATIONS, TYPE_PRODUCTS } from '../../Pages/Customers/const';
 import Input from '../../Atoms/Input/Input'
 import moment from 'moment'
-import { useDispatch } from 'react-redux'
-import { createHandler } from '../../../Store/Slice/customersSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { createHandler, editCustomerHandler } from '../../../Store/Slice/customersSlice'
 
 export default function CustomerModal({closeHandler, submitHandler}) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
+  const current_item = useSelector(state => state?.rootReducer?.customersSlice?.current_edit_item);
   const [data, setData] = useState({
     id: null,
     full_name: "",
@@ -23,6 +24,12 @@ export default function CustomerModal({closeHandler, submitHandler}) {
     type_product: null,
     date: null,
   })
+
+  useEffect(() => {
+    if (current_item) {
+      setData(current_item);
+    }
+  }, [current_item])
 
   const locationsHandler = (location) => {
     setData(old => ({...old, location: location.value}))
@@ -48,30 +55,49 @@ export default function CustomerModal({closeHandler, submitHandler}) {
     setData(old => ({...old, spent: spent}))
   }
 
+  const validation = () => {
+    if (
+        data?.full_name?.length 
+        && data?.email?.length 
+        && data?.location?.length
+        && String(data?.orders?.length)
+        && String(data?.spent?.length)
+        && data?.type_product?.length
+      ) {
+        return true;
+      } else {
+        alert('pls enter all data')
+        return false
+      }
+  }
+
   const createCustomer = () => {
     const id = Math.floor(Math.random() * 5000);
     const date = moment(new Date()).format('YYYY-MM-DD');
-    dispatch(createHandler({...data, id: id, date: date}))
+    validation() && dispatch(createHandler({...data, id: id, date: date}))
   }
-  console.log(data);
+
+  const editCustomer = () => {
+    validation() && dispatch(editCustomerHandler(data))
+  }
 
   return (
     <ModalTemplate title="Customer" closeHandler={closeHandler}>
       <GridBlock gridColumns="1fr">
         <Label>Full Name</Label>
-        <Input onChange={fullNameHandler} />
+        <Input onChange={fullNameHandler} value={data.full_name} />
       </GridBlock>
       <GridBlock gridColumns="1fr">
         <Label>Email</Label>
-        <Input onChange={emailHandler} />
+        <Input onChange={emailHandler} value={data.email}  />
       </GridBlock>
       <GridBlock gridColumns="1fr">
         <Label>Orders</Label>
-        <Input onChange={ordersHandler} />
+        <Input onChange={ordersHandler} value={data.orders} />
       </GridBlock>
       <GridBlock gridColumns="1fr">
         <Label>Spent</Label>
-        <Input onChange={spentHandler} />
+        <Input onChange={spentHandler} value={data.spent} />
       </GridBlock>
       <GridBlock gridColumns="1fr">
         <Label>Locations</Label>
@@ -83,7 +109,7 @@ export default function CustomerModal({closeHandler, submitHandler}) {
       </GridBlock>
       <GridBlock gridColumns="1fr 1fr">
         <Button handler={closeHandler} type="transparent">Cancel</Button>
-        <Button handler={createCustomer}>Save</Button>
+        <Button handler={current_item ? editCustomer : createCustomer}>Save</Button>
       </GridBlock>
     </ModalTemplate>
   )

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Input({onChange}) {
+export default function Input({onChange, value = ""}) {
 
   const handler = (e) => {
     onChange(e.target.value)
@@ -8,7 +8,7 @@ export default function Input({onChange}) {
 
   return (
     <div>
-      <input type="text" onChange={handler} />
+      <input type="text" onChange={handler} defaultValue={value} />
     </div>
   )
 }

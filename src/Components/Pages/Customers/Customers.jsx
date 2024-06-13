@@ -6,17 +6,20 @@ import CustomersTable from '../../Molecules/CustomersTable/CustomersTable'
 import { useDispatch, useSelector } from 'react-redux'
 import FilterButton from '../../Atoms/FilterButton/FilterButton'
 import Search from '../../Atoms/Search/Search'
-import { filterBySpent, searchHandler, searchLocationHandler, searchProductHandler, setData, visibleCustomerModal } from '../../../Store/Slice/customersSlice'
+import { customerRemove, filterBySpent, searchHandler, searchLocationHandler, searchProductHandler, setCurrentEdit, setCurrentRemove, setData, visibleCustomerModal, visibleRemoveModal } from '../../../Store/Slice/customersSlice'
 import { CUSTOMERS, LOCATIONS, SPENTS, TYPE_PRODUCTS } from './const'
 import Select from '../../Atoms/Select/Select'
 import CustomDatePicker from '../../Atoms/CustomDatePicker/CustomDatePicker'
 import CustomerModal from '../../Organisms/CustomerModal/CustomerModal'
+import RemoveModal from '../../Organisms/RemoveModal/RemoveModal'
 
 export default function Customers() {
   const dispatch = useDispatch()
 
   const data = useSelector(state => state?.rootReducer?.customersSlice?.data)
+  const m_data = useSelector(state => state?.rootReducer?.customersSlice?.m_data)
   const customerModalVisible = useSelector(state => state?.rootReducer?.customersSlice?.visible_customer_modal)
+  const removeModalVisible = useSelector(state => state?.rootReducer?.customersSlice?.visible_remove_modal)
 
   const [search, setSearch] = useState('');
   const [filtersShow, setFiltersShow] = useState(false)
@@ -35,12 +38,30 @@ export default function Customers() {
 
   const filterSpend = (spend) => dispatch(filterBySpent(spend))
 
-  const hideCustomerModal = () => dispatch(visibleCustomerModal(false))
-  const showCustomerModal = () => dispatch(visibleCustomerModal(true))
+  const hideCustomerModal = () => {
+    dispatch(setCurrentEdit(null))
+    dispatch(visibleCustomerModal(false))
+  }
+  const showCustomerModal = (item) => {
+    dispatch(setCurrentEdit(item ?? null))
+    dispatch(visibleCustomerModal(true))
+  }
+
+  const hideRemoveModal = () => {
+    dispatch(setCurrentRemove(null))
+    dispatch(visibleRemoveModal(false))
+  }
+  const showRemoveModal = (item) => {
+    dispatch(setCurrentRemove(item))
+    dispatch(visibleRemoveModal(true))
+  }
+
+  const removeHandler = () => dispatch(customerRemove());
 
   return (
     <MainTemplate title="Customers">
       {customerModalVisible ? <CustomerModal closeHandler={hideCustomerModal} /> : null}
+      {removeModalVisible ? <RemoveModal closeHandler={hideRemoveModal} submitHandler={removeHandler} /> : null}
       <CustomersHeader showModal={showCustomerModal} />
       <BlockContainer marginTop="24px">
         <FlexBlock justifyContent="space-between" alignItems="center">
@@ -50,10 +71,10 @@ export default function Customers() {
         <GridBlock gridColumns="1fr 1fr 1fr 1fr">
           <Select options={LOCATIONS} handler={searchByLocation} />
           <Select options={SPENTS} handler={filterSpend} />
-          <CustomDatePicker data={CUSTOMERS} setData={searchByDate} />
+          <CustomDatePicker data={m_data} setData={searchByDate} />
           <Select options={TYPE_PRODUCTS} handler={searchByProduct} />
         </GridBlock>
-        <CustomersTable data={data} />
+        <CustomersTable data={data} removeBtn={showRemoveModal} editBtn={showCustomerModal} />
       </BlockContainer>
     </MainTemplate>
   )
