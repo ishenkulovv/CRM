@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { CUSTOMERS } from "../../Components/Pages/Customers/const";
 
 const initialState = {
-  data: CUSTOMERS
+  data: CUSTOMERS,
+  visible_customer_modal: true,
 };
 
 const customersSlice = createSlice({
@@ -23,10 +24,25 @@ const customersSlice = createSlice({
     },
     filterBySpent(state, action) {
       state.data = CUSTOMERS.filter(item => !action.payload?.value ? item : Number(item.spent) > Number(action.payload.value))
+    },
+    visibleCustomerModal(state, action) {
+      state.visible_customer_modal = action.payload;
+    },
+    createHandler(state, action) {
+      state.data = [action.payload, ...state.data];
+      state.visible_customer_modal = false;
     }
   }
 })
 
-export const {searchHandler, searchLocationHandler, searchProductHandler, setData, filterBySpent} = customersSlice.actions
+export const {
+  searchHandler, 
+  searchLocationHandler, 
+  searchProductHandler, 
+  setData, 
+  filterBySpent,
+  visibleCustomerModal,
+  createHandler
+} = customersSlice.actions
 
 export default customersSlice.reducer

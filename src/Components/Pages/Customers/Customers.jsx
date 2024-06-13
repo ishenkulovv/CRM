@@ -6,15 +6,17 @@ import CustomersTable from '../../Molecules/CustomersTable/CustomersTable'
 import { useDispatch, useSelector } from 'react-redux'
 import FilterButton from '../../Atoms/FilterButton/FilterButton'
 import Search from '../../Atoms/Search/Search'
-import { filterBySpent, searchHandler, searchLocationHandler, searchProductHandler, setData } from '../../../Store/Slice/customersSlice'
+import { filterBySpent, searchHandler, searchLocationHandler, searchProductHandler, setData, visibleCustomerModal } from '../../../Store/Slice/customersSlice'
 import { CUSTOMERS, LOCATIONS, SPENTS, TYPE_PRODUCTS } from './const'
 import Select from '../../Atoms/Select/Select'
 import CustomDatePicker from '../../Atoms/CustomDatePicker/CustomDatePicker'
+import CustomerModal from '../../Organisms/CustomerModal/CustomerModal'
 
 export default function Customers() {
   const dispatch = useDispatch()
 
   const data = useSelector(state => state?.rootReducer?.customersSlice?.data)
+  const customerModalVisible = useSelector(state => state?.rootReducer?.customersSlice?.visible_customer_modal)
 
   const [search, setSearch] = useState('');
   const [filtersShow, setFiltersShow] = useState(false)
@@ -33,9 +35,13 @@ export default function Customers() {
 
   const filterSpend = (spend) => dispatch(filterBySpent(spend))
 
+  const hideCustomerModal = () => dispatch(visibleCustomerModal(false))
+  const showCustomerModal = () => dispatch(visibleCustomerModal(true))
+
   return (
     <MainTemplate title="Customers">
-      <CustomersHeader />
+      {customerModalVisible ? <CustomerModal closeHandler={hideCustomerModal} /> : null}
+      <CustomersHeader showModal={showCustomerModal} />
       <BlockContainer marginTop="24px">
         <FlexBlock justifyContent="space-between" alignItems="center">
           <Search placeholder="Search by name, email, or others..." value={search} setValue={setSearch} />
