@@ -4,7 +4,7 @@ import { ProfileCompanyName, ProfileFullName, ProfileImage, ProfileStyled, Profi
 export default function ProfilePreview() {
   return (
     <ProfileStyled>
-      <ProfileImage src="./assets/images/avatar.png" />
+      <ProfileImage src="/assets/images/avatar.png" />
       <ProfileTexts>
         <ProfileFullName>Tynisha Obey</ProfileFullName>
         <ProfileCompanyName>Makostore</ProfileCompanyName>

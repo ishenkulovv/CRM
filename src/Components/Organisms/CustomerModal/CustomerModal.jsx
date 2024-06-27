@@ -14,6 +14,7 @@ export default function CustomerModal({closeHandler, submitHandler}) {
   const dispatch = useDispatch();
 
   const current_item = useSelector(state => state?.rootReducer?.customersSlice?.current_edit_item);
+
   const [data, setData] = useState({
     id: null,
     full_name: "",

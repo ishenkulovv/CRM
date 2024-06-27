@@ -7,7 +7,7 @@ export default function CustomersHeader({showModal}) {
     <FlexBlock justifyContent="space-between" alignItems="center">
       <span>Show: All Customers</span>
       <FlexBlock width="155px">
-        <Button handler={showModal}>Add customer</Button>
+        <Button handler={() => showModal()}>Add customer</Button>
       </FlexBlock>
     </FlexBlock>
   )
