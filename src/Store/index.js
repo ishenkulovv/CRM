@@ -4,14 +4,15 @@ import storage from "redux-persist/lib/storage";
 
 import ordersSlice from "./Slice/ordersSlice";
 import customersSlice from "./Slice/customersSlice";
+import usersSlice from "./Slice/usersSlice";
 
-const rootReducer = combineReducers({ordersSlice, customersSlice});
+const rootReducer = combineReducers({ordersSlice, customersSlice, usersSlice});
 
 const persistedReducer = persistReducer(
   {
     key: "root",
     storage,
-    whitelist: ['ordersSlice']
+    whitelist: ['ordersSlice', 'usersSlice']
   },
   rootReducer
 );

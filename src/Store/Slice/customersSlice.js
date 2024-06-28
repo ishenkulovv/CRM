@@ -10,6 +10,9 @@ const initialState = {
   visible_remove_modal: false,
 };
 
+
+  
+
 const customersSlice = createSlice({
   name: 'customers',
   initialState,

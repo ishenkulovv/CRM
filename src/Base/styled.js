@@ -13,6 +13,7 @@ export const FlexBlock = styled.div`
   width: 100%;
   justify-content: ${({justifyContent}) => justifyContent || 'flex-start'};
   align-items: ${({alignItems}) => alignItems || 'flex-start'};
+  margin-top: ${({marginTop}) => marginTop || 0};
 `
 
 export const GridBlock = styled(FlexBlock)`
