@@ -1,13 +1,13 @@
 import React from 'react'
 import { InputStyled } from './styled'
 
-export default function Input({onChange, value = "", id, type = 'text'}) {
+export default function Input({onChange, value = "", id, type = 'text', placeholder = 'Placeholder'}) {
 
   const handler = (e) => {
     onChange(e.target.value)
   }
 
   return (
-    <InputStyled id={id} type={type} onChange={handler} defaultValue={value} />
+    <InputStyled placeholder={placeholder} id={id} type={type} onChange={handler} defaultValue={value} />
   )
 }

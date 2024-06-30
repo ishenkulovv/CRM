@@ -2,9 +2,9 @@ import React, { useRef, useState } from 'react'
 import { SelectClear, SelectContent, SelectIcon, SelectOption, SelectOptions, SelectStyled, SelectValue } from './styled'
 import useOnClickOutside from '../../../Hooks/useOnClickOutside'
 
-export default function Select({options, handler}) {
+export default function Select({options, handler, value = null}) {
   const [view, setView] = useState(false)
-  const [currentOption, setCurrentOption] = useState(null)
+  const [currentOption, setCurrentOption] = useState(value ?? null)
   const selectRef = useRef(null)
 
   const toggleView = () => setView(old => !old)

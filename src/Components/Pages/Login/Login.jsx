@@ -83,6 +83,7 @@ export default function Login() {
             <Button handler={handleSubmit}>Sign in with email</Button>
           </FormButton>
         </Form>
+        <NavLink to="/registration">Get start</NavLink>
       </Content>
     </AuthTemplate>
   )

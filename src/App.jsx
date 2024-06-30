@@ -6,6 +6,9 @@ import MyProfile from "./Components/Pages/MyProfile/MyProfile"
 import PersonalInformation from "./Components/Pages/PersonalInformation/PersonalInformation"
 import LoginService from "./Components/Pages/LoginService/LoginService"
 import Login from "./Components/Pages/Login/Login"
+import Registration from "./Components/Pages/Registration/Registration"
+import UserSurvey from "./Components/Pages/UserSurvey/UserSurvey"
+import AddAddress from "./Components/Pages/AddAdress/AddAddress"
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
         <Route path="login-service" element={<LoginService />} />
       </Route>
       <Route path="/login" element={<Login />} />
+      <Route path="/registration" element={<Registration />} />
+      <Route path="/user-survey" element={<UserSurvey />} />
+      <Route path="/add-address" element={<AddAddress />} />
     </Routes>
   )
 }

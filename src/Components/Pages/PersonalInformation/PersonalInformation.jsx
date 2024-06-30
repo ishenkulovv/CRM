@@ -5,28 +5,66 @@ import Input from '../../Atoms/Input/Input'
 import Select from '../../Atoms/Select/Select'
 import Button from '../../Atoms/Button/Button'
 import { REGIONS } from './const';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentUser } from '../../../Store/Slice/usersSlice'
 
 export default function PersonalInformation() {
-  const [image, setImage] = useState(null)
+  const dispatch = useDispatch()
+
+  const user = useSelector(state => state.rootReducer?.usersSlice.current_user)
+
+  const [image, setImage] = useState(user?.avatar ?? null)
   const [currentRegion, setCurrentRegion] = useState(null)
   const [currentCity, setCurrentCity] = useState(null)
+
+  const [data, setData] = useState(user)
 
   const handleImage = (e) => {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (event) => {
-        console.log(event);
+        setImage(event.target.result)
+        dispatch(setCurrentUser({...data, avatar: event.target.result}))
       }
       reader.readAsDataURL(e.target.files[0])
     }
   }
 
-  const handleImageRemove = () => setImage(null)
+  const handleInput = (value, id) => {
+    // setData((old) => ({...old, [id]: value}))
 
-  const handleRegion = (option) => setCurrentRegion(option)
+    setData(old => {
+    // OLD = data
+      return {
+    // Здесь происходит копия нашего объекта data
+        ...old,
+    // Здесь с помощью переменной id мы находим именно тот ключ 
+    // который мы должны поменять
+    // а value это у нас то значение которые мы пишем в input'e
+        [id]: value,
+      }
+    })
+  }
 
-  const handleCity = (option) => setCurrentCity(option);
+  const handleImageRemove = () => {
+    setImage(null)
+    dispatch(setCurrentUser({...data, avatar: null}))
+  }
+
+  const handleRegion = (option) => {
+    setCurrentRegion(option)
+    setData(old => ({...old, country: option?.label}))
+  }
+
+  const handleCity = (option) => {
+    setCurrentCity(option);
+    setData(old => ({...old, city: option?.label}))
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(setCurrentUser({...data, avatar: image}))
+  }
 
   return (
     <BlockContainer padding="24px 32px">
@@ -51,46 +89,46 @@ export default function PersonalInformation() {
       <Row>
           <FormField>
             <FormLabel htmlFor='first_name'>First name</FormLabel>
-            <Input id="first_name" />
+            <Input onChange={(value) => handleInput(value, 'first_name')} value={data?.first_name} id="first_name" />
           </FormField>
           <FormField>
             <FormLabel>Last name</FormLabel>
-            <Input />
+            <Input onChange={(value) => handleInput(value, 'last_name')} value={data?.last_name} />
           </FormField>
         </Row>
         <Row>
           <FormField>
             <FormLabel htmlFor='email'>Email</FormLabel>
-            <Input id="email" />
+            <Input  onChange={(value) => handleInput(value, 'email')} value={data?.email} id="email" />
           </FormField>
           <FormField>
             <FormLabel>Phone Number (Optional)</FormLabel>
-            <Input />
+            <Input onChange={(value) => handleInput(value, 'phone')} value={data?.phone} />
           </FormField>
         </Row>
         <Title>Personal Address</Title>
         <Row>
           <FormField>
             <FormLabel>Country or Region</FormLabel>
-            <Select options={REGIONS} handler={handleRegion} />
+            <Select value={data?.country} options={REGIONS} handler={handleRegion} />
           </FormField>
           <FormField>
             <FormLabel>City</FormLabel>
-            <Select options={currentRegion?.cities ?? []} handler={handleCity} />
+            <Select value={data?.city} options={currentRegion?.cities ?? []} handler={handleCity} />
           </FormField>
         </Row>
         <Row>
           <FormField>
             <FormLabel htmlFor='address'>Address</FormLabel>
-            <Input id="address" />
+            <Input onChange={(value) => handleInput(value, 'address')} value={data?.address} id="address" />
           </FormField>
           <FormField>
             <FormLabel>Postal Code</FormLabel>
-            <Input />
+            <Input onChange={(value) => handleInput(value, 'postal_code')} value={data?.postal_code} />
           </FormField>
         </Row>
         <FormSubmit>
-          <Button>Save</Button>
+          <Button handler={handleSubmit}>Save</Button>
         </FormSubmit>
       </Form>
     </BlockContainer>
