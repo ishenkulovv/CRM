@@ -6,6 +6,10 @@ export const Page = styled.section`
   position: relative;
   border: 1px solid red;
   padding-top: 100px;
+
+  input {
+    background: #FAFAFA;
+  }
 `
 
 export const Container = styled.div`

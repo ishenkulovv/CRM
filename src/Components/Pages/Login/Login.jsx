@@ -8,30 +8,8 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import Button from '../../Atoms/Button/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentUser } from '../../../Store/Slice/usersSlice'
-
-const useInput = (initialValue, validator) => {
-  const [value, setValue] = useState(initialValue)
-  const [error, setError] = useState(false)
-
-  const handleChange = (value) => {
-    setValue(value);
-  }
-
-  const validate = () => {
-    setError(!validator(value))
-    return validator(value)
-  }
-
-  return {
-    value,
-    error,
-    handleChange,
-    validate
-  }
-}
-
-const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase())
-const validatePassword = (password) => password?.length >= 6
+import { useInput } from '../../../Hooks/useInput'
+import { validateEmail, validatePassword } from '../../../Utils/validation'
 
 export default function Login() {
   const dispatch = useDispatch()
